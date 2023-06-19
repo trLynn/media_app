@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('reactions', function (Blueprint $table) {
-            $table->id('reaction_id');
+            $table->id();
             $table->integer('user_id');
             $table->integer('post_id');
             $table->longText('comment');
