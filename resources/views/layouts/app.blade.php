@@ -1,47 +1,159 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+<html lang="en">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pizza Order System</title>
 
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="../dist/css/adminlte.min.css">
+</head>
 
-        <!-- Scripts -->
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+                </li>
+            </ul>
+        </nav>
+        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+            <a href="#" class="brand-link">
 
-        <link rel="stylesheet" href="../css/app.css" />
-        <script href="../js/app.js"></script>
+                <span class="brand-text font-weight-light">Pizza Order System </span>
+            </a>
+            <div class="sidebar">
+                <nav class="mt-2">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
-        <!-- Styles -->
-        @livewireStyles
-    </head>
-    <body class="font-sans antialiased">
-        <x-banner />
+                        <li class="nav-item">
+                            <a href="myProfile.html" class="nav-link">
+                                <i class="fas fa-user-circle"></i>
+                                <p>
+                                    My Profile
+                                </p>
+                            </a>
+                        </li>
 
-        <div class="min-h-screen bg-gray-100">
-            @livewire('navigation-menu')
+                        <li class="nav-item">
+                            <a href="category.html" class="nav-link">
+                                <i class="fas fa-list"></i>
+                                <p>
+                                    Category
+                                </p>
+                            </a>
+                        </li>
 
-            <!-- Page Heading -->
-            @if (isset($header))
-                <header class="bg-white shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
+                        <li class="nav-item">
+                            <a href="pizza.html" class="nav-link">
+                                <i class="fas fa-pizza-slice ms-5"></i>
+                                <p>
+                                    Pizza
+                                </p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="user.html" class="nav-link">
+                                <i class="fas fa-users"></i>
+                                <p>
+                                    User
+                                </p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="order.html" class="nav-link">
+                                <i class="fas fa-book"></i>
+                                <p>
+                                    Order
+                                </p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="carrier.html" class="nav-link">
+                                <i class="fas fa-biking"></i>
+                                <p>
+                                    Carrier
+                                </p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="" class="nav-link">
+                                <i class="fas fa-sign-out-alt"></i>
+                                <p>
+                                    Logout
+                                </p>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </aside>
+
+        <div class="content-wrapper">
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="row mt-4">
+                        <div class="col-8 offset-3 mt-5">
+                            <div class="col-md-9">
+                                <div class="card">
+                                    <div class="card-header p-2">
+                                        <legend class="text-center">User Profile</legend>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="tab-content">
+                                            <div class="active tab-pane" id="activity">
+                                                <form class="form-horizontal">
+                                                    <div class="form-group row">
+                                                        <label for="inputName" class="col-sm-2 col-form-label">Name</label>
+                                                        <div class="col-sm-10">
+                                                            <input type="email" class="form-control" id="inputName" placeholder="Name">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
+                                                        <div class="col-sm-10">
+                                                            <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row">
+                                                        <div class="offset-sm-2 col-sm-10">
+                                                            <a href="">Change Password</a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <div class="offset-sm-2 col-sm-10">
+                                                            <button type="submit" class="btn bg-dark text-white">Submit</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </header>
-            @endif
-
-            <!-- Page Content -->
-            <main>
-                {{ $slot }}
-            </main>
+                </div>
         </div>
+        </section>
+    </div>
 
-        @stack('modals')
+    <aside class="control-sidebar control-sidebar-dark">
+    </aside>
+    </div>
+    <script src="../plugins/jquery/jquery.min.js"></script>
+    <script src="../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../dist/js/adminlte.min.js"></script>
+    <script src="../dist/js/demo.js"></script>
+</body>
 
-        @livewireScripts
-    </body>
 </html>
