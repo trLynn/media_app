@@ -82,13 +82,7 @@
           </li>
 
           <li class="nav-item">
-            <!-- <a href="" class="nav-link">
-              <i class="fas fa-sign-out-alt"></i>
-              <p>
-                Logout
-              </p>
-            </a> -->
-            <form action="{{ route('logout') }}">
+            <form action="{{ route('logout') }}" method='post'>
                 @csrf
                 <button type="submit" class="btn bg-danger w-100">
                 <i class="fas fa-sign-out-alt"></i>

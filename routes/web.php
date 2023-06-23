@@ -32,6 +32,8 @@ Route::middleware([
     // })->name('dashboard');
     Route::get('/',[ProfileController::class,'index'])->name('dashboard');
     Route::post('admin/update',[ProfileController::class,'updateAdminAccount'])->name('admin#update');
+    Route::get('admin/changePassword',[ProfileController::class,'directChangePassword'])->name('admin#directChangePassword');
+    Route::post('admin/changePassword',[ProfileController::class,'changePassword'])->name('admin#changePassword');
 
     Route::get('list',[ListController::class,'index'])->name('admin#list');
     Route::get('category',[CategoryController::class,'index'])->name('admin#category');
