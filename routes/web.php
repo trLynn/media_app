@@ -35,9 +35,18 @@ Route::middleware([
     Route::get('admin/changePassword',[ProfileController::class,'directChangePassword'])->name('admin#directChangePassword');
     Route::post('admin/changePassword',[ProfileController::class,'changePassword'])->name('admin#changePassword');
 
-    Route::get('list',[ListController::class,'index'])->name('admin#list');
+    // admin list
+    Route::get('admin/list',[ListController::class,'index'])->name('admin#list');
+    Route::post('admin/delete/{id}',[ListController::class,'deleteAccount'])->name('admin#accountDelete');
+    Route::post('admin/list-search', [ListController::class, 'adminListSearch'])->name('admin#listSearch');
+
+    //category
     Route::get('category',[CategoryController::class,'index'])->name('admin#category');
+
+    // post
     Route::get('post',[PostController::class,'index'])->name('admin#post');
+
+    //trend post
     Route::get('trend',[TrendPostController::class,'index'])->name('admin#trend');
 
 });

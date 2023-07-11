@@ -10,6 +10,14 @@
         <div class="card-body">
             <div class="tab-content">
                 <div class="active tab-pane" id="activity">
+                @if(Session::has('fail'))
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            {{ Session::get('fail') }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    @endif
                     @if(Session::has('updateSuccess'))
                         <div class="alert alert-success alert-dismissible fade show" role="alert">
                             {{ Session::get('updateSuccess') }}
@@ -50,7 +58,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <div class="offset-sm-2 col-sm-10">
+                            <div class="offset-sm-4 col-sm-10">
                                 <button type="submit" class="btn bg-dark text-white">Change Password</button>
                             </div>
                         </div>

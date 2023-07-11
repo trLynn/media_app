@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class ProfileController extends Controller
@@ -42,6 +43,23 @@ class ProfileController extends Controller
         if($validator->fails()){
             return back()->withErrors($validator)->withInput();
         }
+
+        $dbData = User::where('id',Auth::user()->id)->first();
+        $dbPassword = $dbData->password;
+
+        $hashUserPassword = Hash::make($request->newPassord);
+
+        $updateData = [
+            'password' => $hashUserPassword,
+            'updated_at' => Carbon::now()
+        ];
+
+        if(Hash::check($request->oldPassword, $dbPassword)){
+            User::where('id', Auth::user()->id)->update($updateData);
+            return redirect()->route('dashboard');
+        }else{
+            return back()->with(['fail'=>'Old Password Do not Match!']);
+        }
     }
 
     private function getUserInfo($request)
@@ -69,10 +87,15 @@ class ProfileController extends Controller
 
     private function changePasswordValidationCheck(Request $request)
     {
-        return Validator::make($request->all(),[
+        $validationRules = [
             'oldPassword' => 'required',
-            'newPassword' => 'required',
-            'confirmPassword' => 'required'
-        ]);
+            'newPassword' => 'required|min:8|max:15',
+            'confirmPassword' => 'required|same:newPassword|min:8|max:15'
+        ];
+
+        $validationMessage = [
+            'confirmPassword.same' => 'New Password Confirm Password must be same!'
+        ];
+        return Validator::make($request->all(), $validationRules, $validationMessage);
     }
 }
