@@ -51,6 +51,7 @@ Route::middleware([
 
     // post
     Route::get('post',[PostController::class,'index'])->name('admin#post');
+    Route::post('admin/createPost',[PostController::class,'createPost'])->name('admin#createPost');
 
     //trend post
     Route::get('trend',[TrendPostController::class,'index'])->name('admin#trend');
