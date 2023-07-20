@@ -25,6 +25,13 @@ class ListController extends Controller
     // search admin account
     public function adminListSearch(Request $request)
     {
-
+        $userData = User::orWhere('name','LIKE', '%'.$request->admin_search. '%')
+                    ->orWhere('email','LIKE', '%'.$request->admin_search. '%')
+                    ->orWhere('phone','LIKE', '%'.$request->admin_search. '%')
+                    ->orWhere('address','LIKE', '%'.$request->admin_search. '%')
+                    ->orWhere('gender','LIKE', '%'.$request->admin_search. '%')
+                    ->get();
+        //return back()->with(['userData'=>$userData]);
+        return view('admin.list.index',compact('userData'));
     }
 }

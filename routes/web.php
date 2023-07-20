@@ -6,6 +6,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\TrendPostController;
+use App\Models\Category;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,10 +39,15 @@ Route::middleware([
     // admin list
     Route::get('admin/list',[ListController::class,'index'])->name('admin#list');
     Route::post('admin/delete/{id}',[ListController::class,'deleteAccount'])->name('admin#accountDelete');
-    Route::post('admin/list-search', [ListController::class, 'adminListSearch'])->name('admin#listSearch');
+    Route::post('admin/list', [ListController::class, 'adminListSearch'])->name('admin#listSearch');
 
     //category
     Route::get('category',[CategoryController::class,'index'])->name('admin#category');
+    Route::post('category/create',[CategoryController::class,'createCategory'])->name('admin#createCategory');
+    Route::get('category/delete/{id}',[CategoryController::class,'deleteCategory'])->name('admin#deleteCategory');
+    Route::post('category/search',[CategoryController::class,'categorySearch'])->name('admin#searchCategory');
+    Route::get('category/editPage/{id}',[CategoryController::class,'categoryEditPage'])->name('admin#categoryEditPage');
+    Route::post('category/update/{id}',[CategoryController::class,'categoryUpdate'])->name('admin#categoryUpdate');
 
     // post
     Route::get('post',[PostController::class,'index'])->name('admin#post');
