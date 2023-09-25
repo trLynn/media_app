@@ -15,11 +15,11 @@
 <div class="col-4">
     <div class="card">
         <div class="card-body">
-            <form action="{{ route('admin#createPost') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('admin#createPost', $postDetails['post_id']) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
                     <label>Title</label>
-                    <input type="text" value="{{ old('post_title') }}" name="post_title" class="form-control" placeholder="Enter category name">
+                    <input type="text" value="{{ old('postTitle'), $postDetails['title'] }}" name="post_title" class="form-control" placeholder="Enter category name">
                     @error('post_title')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
@@ -33,14 +33,19 @@
                 </div>
                 <div class="form-group">
                     <label>Image</label>
-                    <input type="file" name="post_image" class="form-control">
+                    <!-- <input type="file" name="post_image" class="form-control"> -->
+                    <img  width="200px" alt="" @if ($postDetails['image'] == null) src="{{ asset('postImage/' . $postDetails['image']) }}" @else src="{{ asset('postImage/'.$postDetails['image']) }}" @endif>
                 </div>
                 <div class="form-group">
                     <label>Category Name</label>
                     <select name="post_category">
                         <option value = "">Choose Category...</option>
                         @foreach($category as $item)
-                            <option value="{{ $item['id'] }}">{{ $item['title'] }}</option>
+                            <option value="{{ $item['category_id'] }}" 
+                            @if ($item['category_id'] == $postDetails['category_id']) selected
+                            @endif>
+                                {{ $item['title'] }}
+                            </option>
                         @endforeach
                     </select>
                     @error('post_category')
@@ -90,11 +95,11 @@
                             <td>{{ $item['title'] }}</td>
                             <td><img class="rounded" width="100px" src="{{asset('postImage/'.$item['image'])}}" alt=""></td>
                             <td>
-                                <a href="{{route('admin#updatePostPage', $item['post_id'])}}">
+                                <a href="{{route('admin#categoryEditPage', $item['id'])}}">
                                     <button class="btn btn-sm bg-dark text-white"><i class="fas fa-edit"></i></button>
                                 </a>
 
-                                <a href="{{ route('admin#deletePost', $item['post_id']) }}">
+                                <a href="{{ route('admin#deleteCategory', $item['id']) }}">
                                     <button class="btn btn-sm bg-danger text-white"><i class="fas fa-trash-alt"></i></button>
                                 </a>
                             </td>
